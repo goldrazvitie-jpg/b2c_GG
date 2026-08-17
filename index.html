@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Golden Gift — квиз подбора украшений | GOLDGLOBE</title>
+<meta name="description" content="Пройдите короткий квиз и получите персональную подборку из трёх украшений под ваш повод, стиль и бюджет.">
+<meta name="theme-color" content="#f8f7f5">
+<meta property="og:title" content="Идеальный подарок за 60 секунд — Golden Gift">
+<meta property="og:description" content="Из сотен украшений подберём три, что точно подойдут.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/quiz-design.css">
+</head>
+<body>
+<div class="app">
+<section class="quiz-screen active" data-screen="0" id="screenHero">
+<div class="im-hero">
+<header class="im-brand-header">
+<img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/>
+</header>
+<main class="im-hero-main">
+<div class="im-hero-photo">
+<img alt="Ювелирное украшение на руке" src="assets/img/hero.jpg"/>
+</div>
+<div class="im-hero-copy">
+<h1>Идеальный подарок<br/>за 60 секунд</h1>
+<p>Ответь на несколько вопросов и получи персональную рекомендацию от ювелирных экспертов.</p>
+</div>
+<button class="im-start-btn" id="startBtn" type="button">
+        Начать подбор
+      </button>
+</main>
+<footer aria-label="Почему нам доверяют" class="im-trust-footer">
+<div class="im-trust-item">
+<span aria-hidden="true" class="im-trust-icon">
+<svg viewbox="0 0 32 32"><path d="M7 11.5 16 5l9 6.5-3.4 12.1H10.4L7 11.5Z"></path><path d="m7 11.5 9 7.2 9-7.2M16 5v13.7M10.4 23.6 16 18.7l5.6 4.9"></path></svg>
+</span>
+<span>17 лет создаём ювелирные украшения</span>
+</div>
+<div class="im-trust-item">
+<span aria-hidden="true" class="im-trust-icon">
+<svg viewbox="0 0 32 32"><path d="M16 4.5 25 8v7.2c0 6.1-3.8 10.2-9 12.3-5.2-2.1-9-6.2-9-12.3V8l9-3.5Z"></path><path d="m11.5 15.8 3 3 6.4-7"></path></svg>
+</span>
+<span>Качество, проверенное временем</span>
+</div>
+<div class="im-trust-item">
+<span aria-hidden="true" class="im-trust-icon">
+<svg viewbox="0 0 32 32"><path d="M16 5.2 18.1 12l6.7 2.1-6.7 2.1L16 23l-2.1-6.8-6.7-2.1 6.7-2.1L16 5.2Z"></path></svg>
+</span>
+<span>Экспертный подбор подарка</span>
+</div>
+</footer>
+</div>
+</section>
+<section class="quiz-screen" data-screen="1">
+<div class="header">
+<button class="back" data-back="" type="button"><svg viewbox="0 0 24 24"><path d="M15 5l-7 7 7 7M8 12h13"></path></svg>Назад</button>
+<div class="logo"><img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/></div>
+<button class="close" data-close="" type="button">Закрыть<svg viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<div class="progress-wrap"><div class="progress-line"><div class="progress-fill" id="progress1"></div></div><div class="dots" id="dots1"></div></div>
+<div class="step-head"><h2>Какой повод для подарка?</h2></div>
+<div class="options reason" data-question="occasion">
+<button class="option" data-tag="помолвка" data-value="Предложение" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M24 24h16l-8-10-8 10Z"></path><circle cx="32" cy="40" fill="none" r="13"></circle><path d="M44 13l3 6 6 3-6 3-3 6-3-6-6-3 6-3 3-6Z"></path></svg></span><span class="option-title">Предложение</span></button>
+<button class="option" data-tag="подарок" data-value="День рождения" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M14 28h36v26H14V28Z" fill="none"></path><path d="M10 22h44v10H10V22Z" fill="none"></path><path d="M32 22v32M14 39h36"></path><path d="M31 21c-10 0-15-10-7-12 6-1 8 5 8 12Zm2 0c10 0 15-10 7-12-6-1-8 5-8 12Z" fill="none"></path></svg></span><span class="option-title">День рождения</span></button>
+<button class="option" data-tag="подарок" data-value="Годовщина" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><circle cx="26" cy="36" fill="none" r="13"></circle><circle cx="39" cy="36" fill="none" r="13"></circle><path d="M35 17c2 4 6 4 8 0" fill="none"></path><path d="M39 14l2-3 2 3"></path></svg></span><span class="option-title">Годовщина</span></button>
+<button class="option" data-tag="подарок" data-value="8 Марта" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><circle cx="32" cy="32" fill="none" r="6"></circle><circle cx="32" cy="16" fill="none" r="8"></circle><circle cx="32" cy="48" fill="none" r="8"></circle><circle cx="16" cy="32" fill="none" r="8"></circle><circle cx="48" cy="32" fill="none" r="8"></circle></svg></span><span class="option-title">8 Марта</span></button>
+<button class="option" data-tag="подарок" data-value="День Влюбленных" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M32 52S12 39 12 24c0-8 10-13 20-1 10-12 20-7 20 1 0 15-20 28-20 28Z" fill="none"></path></svg></span><span class="option-title">День всех влюблённых</span></button>
+<button class="option" data-tag="подарок" data-value="Просто порадовать" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M30 10l5 14 14 5-14 5-5 14-5-14-14-5 14-5 5-14Z" fill="none"></path><path d="M47 7l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6Z"></path><path d="M46 42l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z"></path></svg></span><span class="option-title">Просто порадовать</span></button>
+<button class="option" data-tag="подарок" data-value="Извиниться" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><rect fill="none" height="30" rx="2" width="44" x="10" y="18"></rect><path d="M12 20l20 16 20-16" fill="none"></path><path d="M24 31c4-7 12-7 16 0" fill="none"></path></svg></span><span class="option-title">Извиниться</span></button>
+</div>
+<div class="actions"><button class="btn disabled" data-next="" type="button">Далее <svg viewbox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"></path></svg></button></div>
+</section>
+<section class="quiz-screen" data-screen="2">
+<div class="header"><button class="back" data-back="" type="button"><svg viewbox="0 0 24 24"><path d="M15 5l-7 7 7 7M8 12h13"></path></svg>Назад</button><div class="logo"><img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/></div><button class="close" data-close="" type="button">Закрыть<svg viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div class="progress-wrap"><div class="progress-line"><div class="progress-fill"></div></div><div class="dots"></div></div>
+<div class="step-head"><h2>Какой стиль ей ближе?</h2></div>
+<div class="options four" data-question="style">
+<button class="option" data-tag="минимализм" data-value="Минимализм" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><circle cx="32" cy="32" fill="none" r="17"></circle><path d="M32 8v8M32 48v8"></path></svg></span><span class="option-title">Минимализм</span></button>
+<button class="option" data-tag="классика" data-value="Классика" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M32 9l7 15 16 2-12 11 3 16-14-8-14 8 3-16L9 26l16-2 7-15Z" fill="none"></path></svg></span><span class="option-title">Классика</span></button>
+<button class="option" data-tag="тренды" data-value="Тренды" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M14 44l12-12 8 8 16-20" fill="none"></path><path d="M40 20h10v10" fill="none"></path></svg></span><span class="option-title">Тренды</span></button>
+<button class="option" data-tag="не знаю" data-value="Не знаю" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><circle cx="32" cy="32" fill="none" r="21"></circle><path d="M26 25c1-5 6-8 11-5 6 3 5 10 0 13-4 3-5 5-5 9" fill="none"></path><circle cx="32" cy="49" r="2"></circle></svg></span><span class="option-title">Не знаю</span></button>
+</div>
+<div class="actions"><button class="btn disabled" data-next="" type="button">Далее <svg viewbox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"></path></svg></button></div>
+</section>
+<section class="quiz-screen" data-screen="3">
+<div class="header"><button class="back" data-back="" type="button"><svg viewbox="0 0 24 24"><path d="M15 5l-7 7 7 7M8 12h13"></path></svg>Назад</button><div class="logo"><img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/></div><button class="close" data-close="" type="button">Закрыть<svg viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div class="progress-wrap"><div class="progress-line"><div class="progress-fill"></div></div><div class="dots"></div></div>
+<div class="step-head"><h2>На какой бюджет ориентируемся?</h2></div>
+<div class="options list" data-question="budget">
+<button class="option" data-max="25000" data-min="10000" data-value="10–25 тыс. ₽" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M12 20h40v30H12z" fill="none"></path><path d="M44 30h10v12H44z" fill="none"></path><path d="M12 20l31-8 5 8" fill="none"></path></svg></span><span class="option-title">10–25 тыс. ₽</span></button>
+<button class="option" data-max="40000" data-min="25000" data-value="25–40 тыс. ₽" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M12 20h40v30H12z" fill="none"></path><path d="M44 30h10v12H44z" fill="none"></path><path d="M12 20l31-8 5 8" fill="none"></path></svg></span><span class="option-title">25–40 тыс. ₽</span></button>
+<button class="option" data-max="120000" data-min="40000" data-value="От 40 тыс. ₽" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M12 20h40v30H12z" fill="none"></path><path d="M44 30h10v12H44z" fill="none"></path><path d="M12 20l31-8 5 8" fill="none"></path></svg></span><span class="option-title">от 40 тыс. ₽</span></button>
+</div>
+<div class="actions"><button class="btn disabled" data-next="" type="button">Далее <svg viewbox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"></path></svg></button></div>
+</section>
+<section class="quiz-screen" data-screen="4">
+<div class="header"><button class="back" data-back="" type="button"><svg viewbox="0 0 24 24"><path d="M15 5l-7 7 7 7M8 12h13"></path></svg>Назад</button><div class="logo"><img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/></div><button class="close" data-close="" type="button">Закрыть<svg viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div class="progress-wrap"><div class="progress-line"><div class="progress-fill"></div></div><div class="dots"></div></div>
+<div class="step-head"><h2>Что для тебя важнее всего?</h2></div>
+<div class="options list" data-question="priority">
+<button class="option" data-value="Чтобы ей точно понравилось" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M32 52S12 39 12 24c0-8 10-13 20-1 10-12 20-7 20 1 0 15-20 28-20 28Z" fill="none"></path></svg></span><span class="option-title">Чтобы ей точно понравилось</span></button>
+<button class="option" data-value="Чтобы выглядело дорого" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M14 22l10-10h16l10 10-18 30L14 22Z" fill="none"></path><path d="M14 22h36M24 12l8 40 8-40" fill="none"></path></svg></span><span class="option-title">Чтобы выглядело дорого</span></button>
+<button class="option" data-value="Чтобы подарок был со смыслом" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M14 28h36v26H14V28Z" fill="none"></path><path d="M10 22h44v10H10V22Z" fill="none"></path><path d="M32 22v32M14 39h36"></path><path d="M31 21c-10 0-15-10-7-12 6-1 8 5 8 12Zm2 0c10 0 15-10 7-12-6-1-8 5-8 12Z" fill="none"></path></svg></span><span class="option-title">Чтобы подарок был со смыслом</span></button>
+<button class="option" data-value="Чтобы выбрать быстро и без сомнений" type="button"><span class="option-icon"><svg aria-hidden="true" viewbox="0 0 64 64"><circle cx="32" cy="32" fill="none" r="21"></circle><path d="M32 18v16l10 6" fill="none"></path></svg></span><span class="option-title">Чтобы выбрать быстро и без сомнений</span></button>
+</div>
+<div class="actions"><button class="btn disabled" data-next="" type="button">Далее <svg viewbox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"></path></svg></button></div>
+</section>
+<section class="quiz-screen pre-result-screen" data-screen="5" id="screenReview">
+<div class="header">
+<button class="back" data-back="" type="button"><svg viewbox="0 0 24 24"><path d="M15 5l-7 7 7 7M8 12h13"></path></svg>Назад</button>
+<div class="logo"><img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/></div>
+<button aria-label="Закрыть" class="close" data-close="" type="button"><svg viewbox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"></path></svg></button>
+</div>
+<div class="progress-wrap pre-progress">
+<div class="progress-line"><div class="progress-fill" style="width:100%"></div></div>
+<div class="dots"></div>
+</div>
+<div class="pre-result-shell review-screen-shell">
+<h2 class="pre-result-title review-screen-title">17 лет мы создаём ювелирные украшения и знаем, как непросто бывает найти то самое.</h2>
+<div class="review-card review-card-refined">
+<div class="review-quote-mark">“</div>
+<p class="review-text">Никогда не знаешь, что подарить любимой женщине, чтобы ей наверняка понравилось — это настоящая головоломка. С вашим сервисом выбор оказался намного проще, не пришлось просматривать сотни вариантов. Моя девушка была в восторге!</p>
+<div class="review-author">
+<img alt="Александр, Москва" class="review-avatar-photo" src="assets/img/avatar-alexander.jpg"/>
+<span><strong>Александр</strong>Москва</span>
+</div>
+</div>
+<div class="pre-result-action">
+<button class="btn" id="analysisContinueBtn" type="button">Продолжить <svg viewbox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"></path></svg></button>
+</div>
+</div>
+</section>
+<section aria-live="polite" class="quiz-screen pre-result-screen" data-screen="6" id="screenLoading">
+<div class="header">
+<span></span>
+<div class="logo"><img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/></div>
+<span></span>
+</div>
+<div class="progress-wrap pre-progress">
+<div class="progress-line"><div class="progress-fill" style="width:100%"></div></div>
+<div class="dots"></div>
+</div>
+<div class="pre-result-shell">
+<div class="loading-title-wrap">
+<h2 class="pre-result-title loading-main-title">Мы помогли 10000+ мужчин найти идеальный подарок для неё.</h2>
+</div>
+<div class="jewelry-filter-stage" id="jewelryFilterStage">
+<div class="filter-ring"></div>
+<div class="jewelry-orbit" id="jewelryOrbit"></div>
+</div>
+<div class="loading-status">
+<div class="loading-status-row">
+<div class="loading-icon">✦</div>
+<div class="loading-status-copy">
+<strong id="loadingStageTitle">Учитываем повод подарка</strong>
+
+</div>
+<div class="loading-count" id="loadingStageCount">1 / 4</div>
+</div>
+<div class="loading-bar"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
+</div>
+</div>
+</section>
+<section class="quiz-screen" data-screen="7" id="screenResult">
+<div class="header"><button class="back" data-back="" type="button"><svg viewbox="0 0 24 24"><path d="M15 5l-7 7 7 7M8 12h13"></path></svg>Назад</button><div class="logo"><img alt="Golden Gift — Сервис подбора ювелирных подарков" class="brand-logo" src="assets/img/logo.png"/></div><button class="close" data-close="" type="button">Закрыть<svg viewbox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div class="progress-wrap"><div class="progress-line"><div class="progress-fill"></div></div><div class="dots"></div></div>
+<div class="result-layout updated-result">
+<div class="result-head updated">
+<div>
+
+<h2 id="resultTitle">Из сотен украшений мы отобрали три, которые лучше всего соответствуют твоему запросу.</h2>
+</div>
+
+</div>
+<div class="summary updated" id="summary"></div>
+<div class="product-grid updated" id="recommendedProducts"></div>
+
+</div>
+<div class="result-extension result-extension-v14" id="resultExtension">
+<section class="result-section story-section tone-soft" id="aboutAndHow">
+  <div class="result-section-inner premium-editorial-grid">
+    <article class="premium-editorial-item">
+      <h2>Кто мы?</h2>
+      <p>Golden Gift — сервис персонального подбора ювелирных подарков от компании Golden Glob. 17 лет мы создаём украшения и точно знаем, как непросто бывает определиться среди тысяч вариантов. Поэтому мы создали Golden Gift — чтобы помочь тебе найти подходящий подарок без долгих поисков и сомнений.</p>
+    </article>
+    <article class="premium-editorial-item">
+      <h2>Как это работает?</h2>
+      <p>Мы изучили твои ответы и уже отсекли всё лишнее. Оставили только три варианта, которые лучше всего подходят под твой запрос. В основе подбора — экспертиза ювелирных стилистов и анализ более 10 000 выборов наших покупателей.</p>
+      <p class="editorial-emphasis">Хочешь ещё проще? Бери «Выбор эксперта». Это наш фаворит из трёх. <strong>С ним сложнее всего ошибиться.</strong></p>
+    </article>
+  </div>
+</section>
+
+<section class="result-section packaging-section-v14 tone-white" id="giftPackaging">
+  <div class="result-section-inner packaging-layout-v14">
+    <div class="packaging-visual-v14">
+      <img src="assets/img/packaging.jpg" alt="Подарочная упаковка Golden Gift">
+    </div>
+    <div class="packaging-copy-v14">
+      <h2>Готово к вручению</h2>
+      <p>Тебе не придётся думать об упаковке. Каждое украшение мы оформляем в фирменную подарочную коробку Golden Gift — чтобы впечатление начиналось ещё до того, как она её откроет.</p>
+      <p class="packaging-final"><strong>Останется только выбрать момент.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="result-section convenience-section-v14 tone-soft" id="convenience">
+  <div class="result-section-inner">
+    <div class="convenience-grid-v14">
+      <article class="convenience-item-v14">
+        <div class="convenience-icon-v14" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M5 30h25V14H5zM30 20h7l6 7v3H30zM13 35a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm23 0a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/></svg>
+        </div>
+        <h3>Нужно быстро?</h3>
+        <p>Доставим курьером по Москве и Московской области за 1 день.</p>
+      </article>
+      <article class="convenience-item-v14">
+        <div class="convenience-icon-v14" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M15 13H7V5M7 13c4-6 10-9 17-9 11 0 20 9 20 20S35 44 24 44 4 35 4 24M33 35h8v8M41 35c-4 6-10 9-17 9"/></svg>
+        </div>
+        <h3>Можно не волноваться</h3>
+        <p>Если украшение не подойдёт, его можно вернуть или обменять в течение 14 дней.</p>
+      </article>
+      <article class="convenience-item-v14">
+        <div class="convenience-icon-v14" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 4 40 10v12c0 10-6 18-16 22C14 40 8 32 8 22V10zM16 24l5 5 11-12"/></svg>
+        </div>
+        <h3>Подлинность гарантирована</h3>
+        <p>На каждом украшении — государственное пробирное клеймо и УИН на бирке. Всё легко проверить.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="result-section reviews-section" id="customerReviews">
+<div class="result-section-inner">
+<h2 class="result-section-title">Кажется, мы попали в точку</h2>
+<div class="reviews-grid">
+<article class="big-review">
+<img alt="История Павла — предложение руки и сердца" src="assets/img/review-pavel.jpg">
+<div class="big-review-body">
+<div aria-label="5 из 5" class="review-stars">★★★★★</div>
+<blockquote>«Она сказала: „Да!“»</blockquote>
+<div class="review-author">Павел К.</div>
+<div class="review-date">16.07.2026</div>
+</div>
+</img></article>
+<article class="big-review">
+<img alt="История Кирилла — вручение подарка" src="assets/img/review-kirill.jpg"/>
+<div class="big-review-body">
+<div aria-label="5 из 5" class="review-stars">★★★★★</div>
+<blockquote>«Переживал, что подарок не понравится. И зря! Ваш сервис помог с выбором, упаковка и доставка — на высоте!»</blockquote>
+<div class="review-author">Кирилл С.</div>
+<div class="review-date">12.06.2026</div>
+</div>
+</article>
+</div>
+<div class="all-reviews-row"><button class="all-reviews-btn" id="allReviewsBtn" type="button">Посмотреть все отзывы</button></div>
+</div>
+</section>
+
+<section class="result-section repeat-products-section tone-soft" id="repeatProducts">
+  <div class="result-section-inner repeat-products-inner">
+    <h2 class="repeat-title">Твоя подборка — ещё раз</h2>
+    <div class="product-grid updated repeated-product-grid" id="recommendedProductsRepeat"></div>
+  </div>
+</section>
+
+<section class="result-section compact-consultation-v14 tone-white" id="consultation">
+  <div class="result-section-inner">
+    <h2>Остались вопросы?</h2>
+    <p class="consultation-lede">Напишите нам в мессенджер или оставьте контакт — подскажем, ответим на вопросы и поможем определиться с покупкой.</p>
+    <div class="consultation-actions">
+      <a class="btn" href="#" id="whatsappBtn" target="_blank" rel="noopener">Написать в WhatsApp</a>
+    </div>
+    <form class="form-card lead-form" id="leadForm">
+      <input class="field" id="lf-name" placeholder="Как к вам обращаться" autocomplete="name">
+      <input class="field" id="lf-phone" placeholder="Телефон или @ник" inputmode="tel">
+      <button class="btn" type="button" id="lf-send">Оставить контакт — перезвоним</button>
+    </form>
+  </div>
+</section>
+
+<footer class="compact-footer-v14">
+  <div class="compact-footer-inner-v14">
+    <nav class="compact-footer-links-v14" aria-label="Полезная информация">
+      <a href="#">О нас</a>
+      <a href="#">Доставка и возврат</a>
+      <a href="#">Часто задаваемые вопросы</a>
+      <a href="#">Гарантия качества</a>
+    </nav>
+    <div class="compact-socials-v14" aria-label="Связаться с нами">
+      <span class="compact-socials-title-v15">Связаться с нами</span>
+      <a href="#" aria-label="ВКонтакте" title="ВКонтакте"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12.8 17.2c-5.5 0-8.6-3.8-8.8-10.2h2.8c.1 4.7 2.1 6.7 3.7 7.1V7h2.7v4.1c1.6-.2 3.3-2 3.9-4.1h2.7c-.5 2.6-2.5 4.4-3.9 5.1 1.4.6 3.7 2.1 4.5 5.1h-3c-.6-2-2.1-3.5-4.2-3.7v3.7h-.4Z"/></svg></a>
+      <a href="#" aria-label="Telegram" title="Telegram"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.6 4.2 17.8 19c-.2 1-1 1.2-1.8.7l-4.3-3.2-2.1 2c-.2.3-.4.5-.9.5l.3-4.4 8-7.2c.4-.3-.1-.5-.5-.2l-9.9 6.2-4.2-1.3c-.9-.3-.9-.9.2-1.3l16.5-6.4c.7-.3 1.4.2 1.1 1.3Z"/></svg></a>
+    </div>
+  </div>
+</footer>
+</div>
+</section>
+</div>
+
+<script src="assets/config.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/db.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
