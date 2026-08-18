@@ -112,14 +112,14 @@ function markDirty(id) { STATE.dirty[id] = true; }
 function renderProducts() {
   const box = el(`<div>
     <h2>Товары и цены</h2>
-    <p class="hint">Название, цена и ссылка на фото каждого изделия. Эти данные подставляются в результат квиза. Меняете цену здесь — она меняется во всех подборках.</p>
+    <p class="hint">Название, цена, ссылка на фото и ссылка на товар каждого изделия. Эти данные подставляются в результат квиза. Меняете цену здесь — она меняется во всех подборках. Если заполнить «Ссылку на товар», кнопка «Выбрать» в квизе будет вести на неё вместо WhatsApp.</p>
     <div class="bar"><input class="search" id="psearch" placeholder="Поиск по артикулу или названию">
       <span class="grow"></span><span class="saved" id="psaved">Сохранено ✓</span>
       <button class="btn" id="psave">Сохранить изменения</button></div>
   </div>`);
   const table = el(`<table class="tbl"><thead><tr>
     <th style="width:70px">Артикул</th><th style="width:56px">Фото</th><th>Название</th>
-    <th style="width:150px">Цена</th><th style="width:280px">Ссылка на фото</th><th style="width:80px">Показ</th>
+    <th style="width:150px">Цена</th><th style="width:280px">Ссылка на фото</th><th style="width:280px">Ссылка на товар</th><th style="width:80px">Показ</th>
   </tr></thead><tbody></tbody></table>`);
   const tb = table.querySelector("tbody");
   STATE.products.forEach(p => {
@@ -129,6 +129,7 @@ function renderProducts() {
       <td><input value="${escAttr(p.name)}" data-f="name"></td>
       <td><input class="price" type="number" value="${p.price}" data-f="price"></td>
       <td><input value="${escAttr(p.photo || "")}" data-f="photo" placeholder="https://…/photo.jpg"></td>
+      <td><input value="${escAttr(p.link || "")}" data-f="link" placeholder="https://goldglobe.ru/product/…"></td>
       <td><input type="checkbox" data-f="active" ${p.active ? "checked" : ""}></td>
     </tr>`);
     tr.querySelectorAll("input").forEach(inp => inp.addEventListener("input", () => {
@@ -155,6 +156,7 @@ function renderProducts() {
           name: tr.querySelector('[data-f="name"]').value,
           price: parseInt(tr.querySelector('[data-f="price"]').value) || 0,
           photo: tr.querySelector('[data-f="photo"]').value,
+          link: tr.querySelector('[data-f="link"]').value,
           active: tr.querySelector('[data-f="active"]').checked
         };
         await DB.update("products", `sku=eq.${encodeURIComponent(sku)}`, patch);

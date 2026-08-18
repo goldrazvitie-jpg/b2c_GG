@@ -34,7 +34,7 @@ async function loadData() {
         DB.select("matrix", "select=*"),
         DB.select("result_texts", "select=*")
       ]);
-      PRODUCTS = {}; prods.forEach(p => PRODUCTS[p.sku] = { sku: p.sku, name: p.name, price: p.price, photo: p.photo });
+      PRODUCTS = {}; prods.forEach(p => PRODUCTS[p.sku] = { sku: p.sku, name: p.name, price: p.price, photo: p.photo, link: p.link });
       MATRIX = {}; matrix.forEach(m => MATRIX[m.key] = { aid: m.aid, skus: [m.sku1, m.sku2, m.sku3] });
       TEXTS = {}; texts.forEach(t => TEXTS[t.key] = { tid: t.tid, title: t.title, subtitle: t.subtitle, argument: t.argument });
       return;
@@ -291,6 +291,12 @@ function renderResult() {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       const sku = btn.dataset.sku;
+      const link = (PRODUCTS[sku] || {}).link;
+      if (link) {
+        log("cta", { skus: [sku], meta: { type: "link", source: "product" } });
+        window.open(link, "_blank", "noopener");
+        return;
+      }
       const cta = ctaLink([sku]);
       log("cta", { skus: [sku], meta: { type: "messenger", source: "product" } });
       window.open(cta.href, "_blank", "noopener");
