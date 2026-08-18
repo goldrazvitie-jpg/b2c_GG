@@ -9,6 +9,6 @@
 //  3. Вставьте их ниже и сохраните файл.
 // ============================================================
 window.SUPABASE_CONFIG = {
-  url: "",      // напр. "https://abcdxyz.supabase.co"
-  anonKey: ""   // публичный ключ "anon public"
+  url: "https://uifdnxleeqknenbmlasg.supabase.co",      // напр. "https://abcdxyz.supabase.co"
+  anonKey: "sb_publishable_SNW7t0KVZPUReuri-I6DsA_vhGaHPWR"   // публичный ключ "anon public"
 };
