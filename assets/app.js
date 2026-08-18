@@ -360,10 +360,10 @@ if (allReviewsBtn) allReviewsBtn.addEventListener("click", () => {
   alert("Раздел со всеми отзывами скоро появится.");
 });
 
-/* ----- WhatsApp-кнопка и форма «оставить контакт» ----- */
-const waBtn = document.getElementById("whatsappBtn");
-if (waBtn) {
-  waBtn.addEventListener("click", (e) => {
+/* ----- «Консультация эксперта» ----- */
+const expertConsultationBtn = document.getElementById("expertConsultationBtn");
+if (expertConsultationBtn) {
+  expertConsultationBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const { items } = matchResult();
     const cta = ctaLink(items.map(i => i.sku));
@@ -372,27 +372,86 @@ if (waBtn) {
   });
 }
 
-const sendBtn = document.getElementById("lf-send");
-if (sendBtn) {
-  sendBtn.addEventListener("click", async () => {
-    const nameEl = document.getElementById("lf-name");
-    const phoneEl = document.getElementById("lf-phone");
-    const name = nameEl ? nameEl.value.trim() : "";
-    const phone = phoneEl ? phoneEl.value.trim() : "";
-    if (!phone && !name) return;
+/* ----- «Отправить подборку себе» (модалка с формой Имя + Email) ----- */
+const selectionModal = document.getElementById("selectionModal");
+if (selectionModal) {
+  const selectionForm = document.getElementById("selectionForm");
+  const selectionModalContent = document.getElementById("selectionModalContent");
+  const selectionSuccess = document.getElementById("selectionSuccess");
+
+  // Модалка должна лежать вне анимированных/обрезанных .quiz-screen (overflow:hidden),
+  // иначе position:fixed «прибивается» к экрану квиза вместо всего окна.
+  if (selectionModal.parentElement !== document.body) document.body.appendChild(selectionModal);
+
+  function openSelectionModal() {
+    selectionModal.classList.add("is-open");
+    selectionModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("selection-modal-open");
+    selectionModalContent.hidden = false;
+    selectionSuccess.hidden = true;
+    selectionForm.reset();
+    selectionForm.querySelectorAll("label").forEach(label => label.classList.remove("has-error"));
+    selectionForm.querySelectorAll(".field-error").forEach(error => { error.textContent = ""; });
+    requestAnimationFrame(() => selectionForm.elements.name.focus());
+  }
+
+  function closeSelectionModal() {
+    selectionModal.classList.remove("is-open");
+    selectionModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("selection-modal-open");
+  }
+
+  document.addEventListener("click", event => {
+    if (!event.target.closest("#selectionShareTrigger")) return;
+    event.preventDefault();
+    openSelectionModal();
+  });
+  selectionModal.querySelectorAll("[data-selection-close]").forEach(button => {
+    button.addEventListener("click", closeSelectionModal);
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && selectionModal.classList.contains("is-open")) closeSelectionModal();
+  });
+
+  selectionForm.addEventListener("submit", async event => {
+    event.preventDefault();
+    const nameField = selectionForm.elements.name;
+    const emailField = selectionForm.elements.email;
+    [nameField, emailField].forEach(field => {
+      field.closest("label").classList.remove("has-error");
+      field.closest("label").querySelector(".field-error").textContent = "";
+    });
+
+    let firstInvalid = null;
+    if (!nameField.value.trim()) {
+      nameField.closest("label").classList.add("has-error");
+      nameField.closest("label").querySelector(".field-error").textContent = "Пожалуйста, укажи имя.";
+      firstInvalid = nameField;
+    }
+    if (!emailField.value.trim() || !emailField.validity.valid) {
+      emailField.closest("label").classList.add("has-error");
+      emailField.closest("label").querySelector(".field-error").textContent = "Проверь адрес электронной почты.";
+      firstInvalid = firstInvalid || emailField;
+    }
+    if (firstInvalid) { firstInvalid.focus(); return; }
+
     const { items } = matchResult();
-    log("cta", { skus: items.map(i => i.sku), meta: { type: "lead" } });
+    const name = nameField.value.trim();
+    const email = emailField.value.trim();
+    log("cta", { skus: items.map(i => i.sku), meta: { type: "selection_email", source: "selection_modal" } });
     if (window.DB && DB.enabled) {
       try {
+        // Заглушка: подборка сохраняется как лид, письмо с ней пока не отправляется —
+        // рассылку писем нужно подключить отдельно (сервис e-mail-рассылок).
         await DB.insert("leads", {
-          session_id: sid, name, phone, contact: phone,
+          session_id: sid, name, phone: "", contact: email,
           occasion: answers.occasion, style: answers.style, budget: answers.budget, priority: answers.priority,
           skus: items.map(i => i.sku)
         });
       } catch (e) { console.warn(e); }
     }
-    const form = document.getElementById("leadForm");
-    if (form) form.innerHTML = '<div class="ok">Спасибо! Мы свяжемся с вами в ближайшее время.</div>';
+    selectionModalContent.hidden = true;
+    selectionSuccess.hidden = false;
   });
 }
 
