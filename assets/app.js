@@ -455,6 +455,66 @@ if (selectionModal) {
   });
 }
 
+/* ----- Инфо-страница из подвала (О нас / Доставка / FAQ / Гарантия / Политика ПД) ----- */
+const quizApp = document.querySelector(".app");
+const infoPage = document.getElementById("infoPage");
+if (quizApp && infoPage) {
+  let infoReturnScroll = 0;
+
+  function openInfoPage(targetId) {
+    infoReturnScroll = window.scrollY;
+    quizApp.hidden = true;
+    infoPage.hidden = false;
+    document.body.classList.add("info-page-open");
+    requestAnimationFrame(() => {
+      const target = document.getElementById(targetId) || infoPage;
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+      history.replaceState(null, "", "#" + (target.id || "info-about"));
+    });
+  }
+
+  function closeInfoPage() {
+    infoPage.hidden = true;
+    quizApp.hidden = false;
+    document.body.classList.remove("info-page-open");
+    history.replaceState(null, "", location.pathname + location.search);
+    requestAnimationFrame(() => window.scrollTo({ top: infoReturnScroll, behavior: "auto" }));
+  }
+
+  document.addEventListener("click", event => {
+    const infoTrigger = event.target.closest("[data-info-target]");
+    if (infoTrigger) {
+      event.preventDefault();
+      openInfoPage(infoTrigger.dataset.infoTarget);
+      return;
+    }
+    const closeTrigger = event.target.closest("[data-info-close]");
+    if (closeTrigger) {
+      event.preventDefault();
+      closeInfoPage();
+    }
+  });
+
+  document.querySelectorAll(".faq-question").forEach(button => {
+    button.addEventListener("click", () => {
+      const wasOpen = button.getAttribute("aria-expanded") === "true";
+      document.querySelectorAll(".faq-question").forEach(otherButton => {
+        otherButton.setAttribute("aria-expanded", "false");
+        document.getElementById(otherButton.getAttribute("aria-controls")).hidden = true;
+      });
+      if (!wasOpen) {
+        button.setAttribute("aria-expanded", "true");
+        document.getElementById(button.getAttribute("aria-controls")).hidden = false;
+      }
+    });
+  });
+
+  const initialInfoTarget = location.hash.slice(1);
+  if (["info-about", "info-quality", "info-delivery", "info-faq", "info-privacy"].includes(initialInfoTarget)) {
+    openInfoPage(initialInfoTarget);
+  }
+}
+
 /* ----- Старт ----- */
 (async function () {
   await loadData();
