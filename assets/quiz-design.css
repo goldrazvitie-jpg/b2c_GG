@@ -2992,3 +2992,24 @@ body.info-page-open{background:#f8f6f2}
   .info-header{height:clamp(72px,11vh,90px);}
   .info-logo{width:min(250px,68vw);max-height:62px;}
 }
+
+/* ============================================================
+   v30: выдача — заголовок выше, бейдж эксперта компактнее и в углу
+   (не перекрывает «X%»).
+   ============================================================ */
+@media (max-width:700px){
+  /* заголовок выше — меньше отступ от шапки */
+  #screenResult .result-layout.updated-result{ padding-top:2px !important; }
+  #screenResult .result-head.updated{ margin-top:0 !important; }
+  #screenResult .result-head.updated h2,
+  #screenResult #resultTitle{ margin-top:6px !important; }
+}
+/* бейдж «Выбор эксперта» — меньше и плотнее в угол, не заходит на «X%» */
+#screenResult .expert-badge{
+  width:50px !important; height:50px !important;
+  top:10px !important; left:10px !important;
+  padding:6px !important;
+  font-size:7px !important; line-height:1.15 !important;
+  gap:1px !important;
+}
+#screenResult .expert-badge .star{ font-size:11px !important; }
