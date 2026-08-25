@@ -1151,21 +1151,25 @@
   }
   .quiz-screen:not(#screenHero):not(#screenResult) .header .back{
     position:absolute;
-    left:18px;
-    bottom:14px;
-    width:52px;
-    height:52px;
-    padding:0;
-    border:2px solid var(--im-gold);
-    border-radius:50%;
+    left:14px;
+    top:50%;
+    bottom:auto;
+    transform:translateY(-50%);
+    width:auto;
+    height:auto;
+    padding:6px;
+    border:0;
+    border-radius:0;
+    background:transparent;
     display:flex;
+    align-items:center;
     justify-content:center;
     font-size:0;
     z-index:6;
   }
   .quiz-screen:not(#screenHero):not(#screenResult) .header .back svg{
-    width:23px;
-    height:23px;
+    width:24px;
+    height:24px;
   }
   .quiz-screen:not(#screenHero):not(#screenResult) .header .close{
     display:none;
@@ -1250,16 +1254,17 @@
     grid-auto-rows:minmax(34px,1fr);
   }
   .quiz-screen:not(#screenHero):not(#screenResult) .actions .btn{min-height:46px}
-  .quiz-screen:not(#screenHero):not(#screenResult) .header .back{
-    width:46px;height:46px;bottom:12px;
-  }
 }
 
 /* Кнопка «Назад» в шапке: единая простая стрелка-шеврон (без кружка),
    одного размера и вертикально отцентрованная по логотипу на всех
    мобильных/планшетных ширинах — одинаково на экранах вопросов и выдачи. */
 @media (max-width:980px){
-  .quiz-screen:not(#screenHero) .header .back{
+  /* Двойной :not для экранов-вопросов повышает специфичность, чтобы
+     перебить базовые правила .back с текстом; для выдачи — отдельный
+     селектор. Стиль одинаковый: плоская стрелка без кружка, по центру. */
+  .quiz-screen:not(#screenHero):not(#screenResult) .header .back,
+  #screenResult .header .back{
     position:absolute;
     left:14px;
     top:50%;
@@ -1280,10 +1285,15 @@
     color:var(--text);
     z-index:6;
   }
-  .quiz-screen:not(#screenHero) .header .back svg{
+  .quiz-screen:not(#screenHero):not(#screenResult) .header .back svg,
+  #screenResult .header .back svg{
     width:24px;
     height:24px;
     margin:0;
+  }
+  /* Крестик «Закрыть» скрываем и на вопросах, и на выдаче для единообразия. */
+  .quiz-screen:not(#screenHero) .header .close{
+    display:none !important;
   }
   /* Шапка выдачи — как на вопросах: рамка снизу, крупный логотип по центру,
      крестик скрыт (возврат — стрелкой «Назад»). */
@@ -1291,6 +1301,10 @@
     grid-template-columns:1fr !important;
     place-items:center !important;
     padding:6px 12px !important;
+    /* та же высота, что и у шапки экранов-вопросов (её задаёт grid-строка
+       секции clamp(72px,11vh,90px)) — чтобы блок шапки был одного размера */
+    min-height:clamp(72px,11vh,90px) !important;
+    box-sizing:border-box !important;
     border-bottom:1px solid #e4e4e4 !important;
     background:#fff !important;
     position:relative !important;
@@ -2634,9 +2648,9 @@ html, body { width:100%; overflow-x:hidden; }
   .premium-editorial-item{padding-top:30px!important;}
   .compact-socials-v14{margin-top:18px;flex-wrap:wrap;}
   .compact-socials-title-v15{width:100%;}
-  #screenResult .product-frame{aspect-ratio:1 / 1.04!important;}
+  #screenResult .product-frame{aspect-ratio:1 / 0.82!important;}
   #screenResult .product-frame .product-img,
-  #screenResult .product:not(.featured) .product-frame .product-img{inset:116px 12px 12px!important;}
+  #screenResult .product:not(.featured) .product-frame .product-img{inset:96px 12px 12px!important;}
   #screenResult .product-grid.updated .product-img img{padding:42px!important;}
   #screenResult .product[data-sku="КВ02"] .product-img img{padding:30px!important;}
 }
