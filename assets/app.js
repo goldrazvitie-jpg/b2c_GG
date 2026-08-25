@@ -524,7 +524,7 @@ if (quizApp && infoPage) {
   });
 
   const initialInfoTarget = location.hash.slice(1);
-  if (["info-about", "info-quality", "info-delivery", "info-faq", "info-privacy"].includes(initialInfoTarget)) {
+  if (["info-about", "info-quality", "info-delivery", "info-faq"].includes(initialInfoTarget)) {
     openInfoPage(initialInfoTarget);
   }
 }
