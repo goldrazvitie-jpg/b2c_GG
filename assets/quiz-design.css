@@ -2688,10 +2688,12 @@ html, body { width:100%; overflow-x:hidden; }
 
 /* v18: updated budgets and refined result-page composition */
 #screenResult .convenience-grid-v14{
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  max-width:860px;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  max-width:1180px;
   margin-inline:auto;
 }
+/* Фиолетовая пометка «Wildberries» */
+.wb-mark{color:#7b119e;font-weight:600;white-space:nowrap;}
 #screenResult .product-frame .product-img,
 #screenResult .product:not(.featured) .product-frame .product-img{
   inset:122px 0 0!important;
@@ -2917,3 +2919,47 @@ body.info-page-open{background:#f8f6f2}
 .info-bottom a,.info-bottom button{border:0;background:none;padding:0;color:#fff;text-decoration:none;opacity:.78;font:500 12px/1.4 var(--sans);cursor:pointer}
 @media(max-width:980px){.info-nav{display:none}.info-section,.info-faq{grid-template-columns:1fr;min-height:0}.info-section.is-reversed .info-copy{order:1}.info-section.is-reversed .info-visual{order:2}.info-copy{padding:70px 8vw}.info-visual,.info-faq-media{min-height:52vw}.info-faq-media{order:2}.info-faq-content{padding:70px 8vw}.privacy-grid{grid-template-columns:1fr}.info-bottom{align-items:flex-start;flex-direction:column}.info-bottom-contact{align-self:stretch;justify-content:space-between}}
 @media(max-width:600px){.info-header{height:64px;padding:0 18px}.info-back span{display:none}.info-logo{width:154px}.info-section,.info-faq,.privacy-section{scroll-margin-top:64px}.info-copy,.info-faq-content{padding:52px 22px}.info-title{font-size:43px}.info-rule{margin:22px 0 28px}.info-copy p{font-size:16px}.info-visual,.info-faq-media{min-height:72vw}.info-visual img,.info-faq-media img{object-position:center!important}.faq-question{padding:21px 0}.privacy-section{padding:60px 22px}.privacy-head{text-align:left;margin-bottom:42px}.privacy-head .info-rule{margin:22px 0 0}.privacy-card h3{font-size:25px}.info-bottom{padding:36px 22px}.info-bottom-contact{width:100%;align-items:flex-start;flex-direction:column;gap:14px}.info-bottom-socials a{width:40px;height:40px}}
+
+/* ============================================================
+   v28: карточка результата — плашка «X% совпадение» по центру и
+   вверху, фото украшения целиком вписано в рамку (desktop + mobile).
+   ============================================================ */
+/* плашка процентов: по центру, в верхней полосе карточки */
+#screenResult .product-match,
+#screenResult .product.featured .product-match{
+  left:0 !important; right:0 !important;
+  top:16px !important;
+  padding:0 16px !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:baseline !important;
+  text-align:center !important;
+}
+#screenResult .product.featured .product-match{ display:flex !important; }
+#screenResult .product.featured .product-match strong{ display:inline !important; margin:0 6px 0 0 !important; }
+#screenResult .product.featured .product-match span{ display:inline !important; }
+/* бейдж «Выбор эксперта» компактнее и в самом углу */
+#screenResult .expert-badge{ width:64px !important; height:64px !important; top:12px !important; left:12px !important; font-size:8px !important; }
+#screenResult .expert-badge .star{ font-size:13px !important; }
+/* фото целиком видно и вписано в рамку */
+#screenResult .product-frame .product-img img,
+#screenResult .product-grid.updated .product-img img{
+  object-fit:contain !important;
+  object-position:center !important;
+  width:100% !important; height:100% !important;
+  max-width:100% !important; max-height:100% !important;
+  padding:0 !important;
+}
+/* фото-область начинается ниже верхней полосы с плашкой */
+#screenResult .product-frame .product-img,
+#screenResult .product:not(.featured) .product-frame .product-img{
+  inset:52px 14px 14px !important;
+}
+@media (max-width:700px){
+  #screenResult .product-frame{ aspect-ratio:1 / 0.9 !important; }
+  #screenResult .product-frame .product-img,
+  #screenResult .product:not(.featured) .product-frame .product-img{ inset:50px 14px 14px !important; }
+  #screenResult .product-match strong{ font-size:17px !important; }
+  #screenResult .product.featured .product-match strong{ font-size:17px !important; color:#171717 !important; }
+  #screenResult .product-match span{ font-size:12px !important; }
+}
