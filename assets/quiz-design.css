@@ -1470,6 +1470,11 @@ html, body, .app, .quiz-screen, .quiz-screen.active,
   .quiz-screen:not(#screenHero):not(#screenResult) .step-head {
     padding:10px 0 5px !important;
   }
+  /* На коротких экранах шапка вопросов сжимается до 64px — приводим к
+     тому же размеру шапку выдачи, чтобы шапка была одинаковой везде
+     (экран отзыва — в отдельном блоке ниже, чтобы перебить своё же
+     правило grid для #screenReview). */
+  #screenResult .header{ min-height:64px !important; }
 }
 
 
@@ -3013,3 +3018,15 @@ body.info-page-open{background:#f8f6f2}
   gap:1px !important;
 }
 #screenResult .expert-badge .star{ font-size:11px !important; }
+
+/* ============================================================
+   v31: на коротких экранах (≤720px по высоте) шапка экрана отзыва тоже
+   64px — как у экранов вопросов/выдачи, чтобы шапка была одного размера
+   везде. Размещено в конце, чтобы перебить более раннее правило grid
+   для #screenReview.
+   ============================================================ */
+@media (max-width:700px) and (max-height:720px){
+  #screenReview:not(#screenHero):not(#screenResult){
+    grid-template-rows:64px auto minmax(0,1fr) !important;
+  }
+}
