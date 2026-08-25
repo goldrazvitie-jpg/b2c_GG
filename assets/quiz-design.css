@@ -1255,6 +1255,47 @@
   }
 }
 
+/* Кнопка «Назад» в шапке: единый круглый вид одного размера и
+   вертикальное центрирование по логотипу на всех мобильных/планшетных
+   ширинах (раньше кнопка прижималась к верху и «съезжала» с логотипа). */
+@media (max-width:980px){
+  .quiz-screen:not(#screenHero):not(#screenResult) .header .back{
+    position:absolute;
+    left:16px;
+    top:50%;
+    bottom:auto;
+    transform:translateY(-50%);
+    width:44px;
+    height:44px;
+    min-width:44px;
+    padding:0;
+    gap:0;
+    font-size:0;
+    border:2px solid var(--im-gold);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:6;
+  }
+  .quiz-screen:not(#screenHero):not(#screenResult) .header .back svg{
+    width:20px;
+    height:20px;
+    margin:0;
+  }
+}
+/* Крестик «Закрыть» на планшетной ширине центрируем по вертикали
+   (на телефонах ≤700px он скрыт прежним правилом). */
+@media (min-width:701px) and (max-width:980px){
+  .quiz-screen:not(#screenHero):not(#screenResult) .header .close{
+    position:absolute;
+    right:16px;
+    top:50%;
+    bottom:auto;
+    transform:translateY(-50%);
+  }
+}
+
 /* Editorial refinements */
 html, body, .app, .quiz-screen, .quiz-screen.active,
 #screenHero, #screenResult,
