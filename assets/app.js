@@ -97,13 +97,18 @@ function updateProgress() {
     const fill = screen.querySelector(".progress-fill");
     const dots = screen.querySelector(".dots");
     const step = Math.min(Math.max(screenNumber, 1), totalSteps);
-    const percent = screenNumber === 0 ? 0 : (step / totalSteps) * 100;
+    // Точки расставлены по 0/25/50/75/100 % (totalSteps точек).
+    // На каждом шаге заливка доводится ровно до следующей точки, и эта
+    // точка (как и все пройденные) подсвечивается — чтобы прогресс всегда
+    // упирался в точку, а не останавливался между ними.
+    const reachedDot = Math.min(step + 1, totalSteps);
+    const percent = screenNumber === 0 ? 0 : ((reachedDot - 1) / (totalSteps - 1)) * 100;
     if (fill) fill.style.width = percent + "%";
     if (dots) {
       dots.innerHTML = "";
       for (let i = 1; i <= totalSteps; i++) {
         const dot = document.createElement("span");
-        dot.className = "dot" + (i <= step ? " active" : "");
+        dot.className = "dot" + (i <= reachedDot ? " active" : "");
         dots.appendChild(dot);
       }
     }
