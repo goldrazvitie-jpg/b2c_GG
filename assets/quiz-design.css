@@ -911,6 +911,7 @@
   padding:0 18px;
   gap:0;
   align-self:center;
+  position:relative;
 }
 .quiz-screen:not(#screenHero):not(#screenResult) .progress-line{
   height:4px;
@@ -922,8 +923,11 @@
 }
 .quiz-screen:not(#screenHero):not(#screenResult) .dots{
   position:absolute;
-  left:20px;
-  right:20px;
+  left:18px;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  margin:0;
   justify-content:space-between;
   pointer-events:none;
 }
