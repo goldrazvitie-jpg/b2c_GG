@@ -68,7 +68,7 @@ const OCCASION_CODE = {
   "Извиниться": "apology"
 };
 const STYLE_CODE = { "Минимализм": "minimal", "Классика": "classic", "Тренды": "trends", "Не знаю": "unknown" };
-const BUDGET_CODE = { "10–25 тыс. ₽": "b1", "25–40 тыс. ₽": "b2", "От 40 тыс. ₽": "b3" };
+const BUDGET_CODE = { "10–15 тыс. ₽": "b1", "15–20 тыс. ₽": "b2", "от 20 тыс. ₽": "b3" };
 const PRIORITY_CODE = {
   "Чтобы ей точно понравилось": "like",
   "Чтобы выглядело дорого": "expensive",

@@ -1723,6 +1723,14 @@ html, body, .app, .quiz-screen, .quiz-screen.active,
   .review-card { margin:28px auto 22px; padding:32px 22px 28px; }
   .review-text { font-size:27px; }
   .pre-result-action .btn { width:100%; min-width:0; }
+  /* Экран отзыва: у секции своя сетка (шапка / прогресс / оболочка-1fr)
+     вместо 5-строчной сетки вопросов, чтобы оболочка растягивалась на всю
+     высоту, а кнопка «Продолжить» внутри неё прижималась к низу экрана.
+     Тройной :not поднимает специфичность до 3 ID, чтобы перебить базовое
+     правило сетки вопросов (2 ID + !important). */
+  #screenReview:not(#screenHero):not(#screenResult) { grid-template-rows:clamp(72px,11vh,90px) auto minmax(0,1fr) !important; }
+  #screenReview .pre-result-shell { display:flex; flex-direction:column; width:100%; align-self:stretch; min-height:0; }
+  #screenReview .pre-result-action { margin-top:auto; padding-top:20px; width:100%; }
   .jewelry-filter-stage { height:330px; margin-top:8px; }
   .loading-jewel { width:66px; height:66px; }
   .loading-jewel.keep { width:92px; height:92px; }
