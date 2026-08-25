@@ -2963,3 +2963,32 @@ body.info-page-open{background:#f8f6f2}
   #screenResult .product.featured .product-match strong{ font-size:17px !important; color:#171717 !important; }
   #screenResult .product-match span{ font-size:12px !important; }
 }
+
+/* ============================================================
+   v29: подвал в две колонки — слева навигация, справа Политика ПД
+   и «Связаться с нами» с иконками (как в макете).
+   ============================================================ */
+.footer-privacy-link{color:#fff;text-decoration:none;font:500 13px/1.4 var(--sans);opacity:.82;}
+.footer-privacy-link:hover{opacity:1;}
+.compact-footer-contact{display:flex;flex-direction:column;gap:22px;align-items:flex-start;}
+.compact-socials-v14{display:flex;flex-direction:column;align-items:flex-start;gap:12px;}
+.compact-socials-title-v15{width:auto;}
+.compact-socials-row{display:flex;align-items:center;gap:14px;}
+@media (max-width:700px){
+  .compact-footer-v14{padding:30px 22px;}
+  .compact-footer-inner-v14{display:grid!important;grid-template-columns:1fr 1fr;gap:26px 18px;align-items:start;}
+  .compact-footer-links-v14{display:flex!important;flex-direction:column;gap:18px;margin-bottom:0!important;}
+  .compact-footer-contact{gap:24px;}
+  .compact-socials-v14{margin-top:0;flex-wrap:nowrap;}
+}
+
+/* ============================================================
+   v29: шапка инфо-страницы («О нас» и т.д.) — тех же размеров, что
+   и шапка квиза (крупный логотип по центру, та же высота).
+   ============================================================ */
+.info-header{height:clamp(72px,11vh,90px);}
+.info-logo{width:min(250px,68vw);max-width:270px;height:auto;max-height:62px;}
+@media(max-width:600px){
+  .info-header{height:clamp(72px,11vh,90px);}
+  .info-logo{width:min(250px,68vw);max-height:62px;}
+}
