@@ -80,9 +80,18 @@ const PRIORITY_CODE = {
 const screens = Array.from(document.querySelectorAll(".quiz-screen"));
 const totalSteps = 5;
 let loadingSequenceTimer = null;
+let loadingFinalTimer = null;
 const state = { screen: 0 };
 
+function stopLoadingSequence() {
+  if (loadingSequenceTimer) { clearInterval(loadingSequenceTimer); loadingSequenceTimer = null; }
+  if (loadingFinalTimer) { clearTimeout(loadingFinalTimer); loadingFinalTimer = null; }
+}
+
 function showScreen(number) {
+  // при любом переходе отменяем автопереход экрана загрузки,
+  // чтобы кнопка «Назад» с него реально возвращала на шаг назад
+  stopLoadingSequence();
   state.screen = number;
   screens.forEach(screen => {
     screen.classList.toggle("active", Number(screen.dataset.screen) === number);
@@ -219,7 +228,7 @@ function prepareLoadingVisual() {
 }
 
 function startLoadingSequence() {
-  if (loadingSequenceTimer) clearInterval(loadingSequenceTimer);
+  stopLoadingSequence();
   prepareLoadingVisual();
 
   const steps = [
@@ -254,7 +263,7 @@ function startLoadingSequence() {
     } else {
       clearInterval(loadingSequenceTimer);
       loadingSequenceTimer = null;
-      setTimeout(() => showScreen(7), 700);
+      loadingFinalTimer = setTimeout(() => showScreen(7), 700);
     }
   }, 1150);
 }
