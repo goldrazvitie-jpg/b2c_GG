@@ -29,15 +29,17 @@
       if (!r.ok) throw new Error(await r.text());
       return r.json();
     },
-    // ---- вставка (события, заявки) ----
-    async insert(table, row) {
+    // ---- вставка (события, заявки; админ: новый товар) ----
+    async insert(table, row, opts) {
+      opts = opts || {};
+      const prefer = opts.returning ? "return=representation" : "return=minimal";
       const r = await fetch(`${base}/rest/v1/${table}`, {
         method: "POST",
-        headers: headers({ "Prefer": "return=minimal" }),
+        headers: headers({ "Prefer": prefer }),
         body: JSON.stringify(row)
       });
       if (!r.ok) throw new Error(await r.text());
-      return true;
+      return opts.returning ? r.json() : true;
     },
     // ---- обновление (админ: каталог, матрица, тексты) ----
     async update(table, matchQuery, patch) {

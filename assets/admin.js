@@ -115,6 +115,7 @@ function renderProducts() {
     <p class="hint">Название, цена, ссылка на фото и ссылка на товар каждого изделия. Эти данные подставляются в результат квиза. Меняете цену здесь — она меняется во всех подборках. Если заполнить «Ссылку на товар», кнопка «Выбрать» в квизе будет вести на неё вместо WhatsApp.</p>
     <div class="bar"><input class="search" id="psearch" placeholder="Поиск по артикулу или названию">
       <span class="grow"></span><span class="saved" id="psaved">Сохранено ✓</span>
+      <button class="btn ghost" id="padd">+ Добавить товар</button>
       <button class="btn" id="psave">Сохранить изменения</button></div>
   </div>`);
   const table = el(`<table class="tbl"><thead><tr>
@@ -147,6 +148,7 @@ function renderProducts() {
       tr.style.display = (sku.includes(q) || nm.includes(q)) ? "" : "none";
     });
   };
+  box.querySelector("#padd").onclick = () => openAddProduct();
   box.querySelector("#psave").onclick = async (e) => {
     const btn = e.target; btn.disabled = true; btn.textContent = "Сохраняем…";
     try {
@@ -167,6 +169,78 @@ function renderProducts() {
     btn.disabled = false; btn.textContent = "Сохранить изменения";
   };
   return box;
+}
+
+/* ---------------- ДОБАВЛЕНИЕ ТОВАРА ---------------- */
+function openAddProduct() {
+  const overlay = el(`<div class="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Новый товар">
+      <h3>Новый товар</h3>
+      <p class="msub">Добавьте изделие в справочник. После сохранения его можно назначить в «Выдаче изделий».</p>
+      <div class="field"><label>Артикул *</label><input id="a-sku" placeholder="например, КВ25" autocomplete="off"></div>
+      <div class="field"><label>Название</label><input id="a-name" placeholder="Кольцо / Серьги / Колье…" autocomplete="off"></div>
+      <div class="field"><label>Цена, ₽</label><input id="a-price" type="number" min="0" placeholder="0"></div>
+      <div class="field"><label>Ссылка на фото</label><input id="a-photo" placeholder="https://…/photo.jpg" autocomplete="off"></div>
+      <div class="field"><label>Ссылка на товар</label><input id="a-link" placeholder="https://wildberries.ru/…" autocomplete="off"></div>
+      <div class="field check"><input id="a-active" type="checkbox" checked><label for="a-active">Показывать в подборках</label></div>
+      <div class="merr" id="a-err"></div>
+      <div class="mactions">
+        <button class="btn ghost" id="a-cancel">Отмена</button>
+        <button class="btn" id="a-save">Добавить товар</button>
+      </div>
+    </div>
+  </div>`);
+  document.body.appendChild(overlay);
+  const err = overlay.querySelector("#a-err");
+  const close = () => overlay.remove();
+  overlay.addEventListener("click", e => { if (e.target === overlay) close(); });
+  document.addEventListener("keydown", function onEsc(e) { if (e.key === "Escape") { close(); document.removeEventListener("keydown", onEsc); } });
+  overlay.querySelector("#a-cancel").onclick = close;
+  const skuInput = overlay.querySelector("#a-sku");
+  skuInput.focus();
+
+  overlay.querySelector("#a-save").onclick = async (e) => {
+    err.textContent = "";
+    const sku = skuInput.value.trim();
+    if (!sku) { err.textContent = "Укажите артикул."; skuInput.focus(); return; }
+    if (STATE.products.some(p => String(p.sku).toLowerCase() === sku.toLowerCase())) {
+      err.textContent = "Товар с таким артикулом уже есть."; skuInput.focus(); return;
+    }
+    const maxSort = STATE.products.reduce((m, p) => Math.max(m, Number(p.sort) || 0), 0);
+    const row = {
+      sku,
+      name: overlay.querySelector("#a-name").value.trim(),
+      price: parseInt(overlay.querySelector("#a-price").value) || 0,
+      photo: overlay.querySelector("#a-photo").value.trim(),
+      link: overlay.querySelector("#a-link").value.trim(),
+      active: overlay.querySelector("#a-active").checked,
+      sort: maxSort + 1
+    };
+    const btn = e.target; btn.disabled = true; btn.textContent = "Добавляем…";
+    try {
+      let created;
+      try {
+        const res = await DB.insert("products", row, { returning: true });
+        created = Array.isArray(res) ? res[0] : res;
+      } catch (insErr) {
+        // на случай, если колонки sort нет в таблице — пробуем без неё
+        if (String(insErr).toLowerCase().includes("sort")) {
+          const { sort, ...noSort } = row;
+          const res = await DB.insert("products", noSort, { returning: true });
+          created = Array.isArray(res) ? res[0] : res;
+        } else { throw insErr; }
+      }
+      STATE.products.push(created || row);
+      STATE.products.sort((a, b) => (Number(a.sort) || 0) - (Number(b.sort) || 0));
+      STATE.productMap[row.sku] = created || row;
+      close();
+      paint();
+      flash("psaved");
+    } catch (insErr) {
+      err.textContent = "Не удалось добавить: " + insErr;
+      btn.disabled = false; btn.textContent = "Добавить товар";
+    }
+  };
 }
 
 /* ---------------- ВЫДАЧА (матрица) ---------------- */

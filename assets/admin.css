@@ -44,6 +44,21 @@ input,select,textarea,button{font-family:inherit}
 .saved.show{opacity:1}
 .search{padding:9px 13px;border:1px solid var(--line-strong);border-radius:10px;font-size:14px;min-width:200px}
 
+/* modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(40,28,15,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 26px 24px;max-width:440px;width:100%;box-shadow:0 30px 60px -30px rgba(60,40,20,.4);max-height:92vh;overflow:auto}
+.modal h3{font-family:var(--font-display);font-size:24px;margin:0 0 4px}
+.modal .msub{color:var(--muted);font-size:13px;margin:0 0 18px}
+.modal .field{margin-bottom:13px}
+.modal .field label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:5px}
+.modal .field input{width:100%;padding:11px 13px;border:1px solid var(--line-strong);border-radius:10px;font-size:14px}
+.modal .field input:focus{outline:none;border-color:var(--gold)}
+.modal .field.check{display:flex;align-items:center;gap:8px}
+.modal .field.check input{width:auto;margin:0}
+.modal .field.check label{margin:0}
+.modal .merr{color:var(--warn);font-size:13px;min-height:18px;margin:2px 0 6px}
+.modal .mactions{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+
 /* tables */
 .tbl{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .tbl th,.tbl td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}
