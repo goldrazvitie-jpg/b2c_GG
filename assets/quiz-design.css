@@ -3051,20 +3051,40 @@ body.info-page-open{background:#f8f6f2}
     grid-template-columns:1fr auto 1fr !important;
     gap:18px !important; align-items:center !important;
   }
-  #screenResult .progress-wrap{ width:auto !important; margin-left:-28px !important; margin-right:-28px !important; }
+  /* прогресс выдачи = как на экранах вопросов: линия во всю ширину, точки
+     распределены равномерно (абсолютно), а не сгруппированы справа */
+  #screenResult .progress-wrap{
+    width:auto !important; max-width:none !important;
+    margin:0 -28px 8px !important;
+    padding:0 18px !important;
+    display:block !important; position:relative !important;
+  }
+  #screenResult .progress-line{
+    flex:none !important; width:100% !important; height:4px !important;
+    background:#dedede !important; overflow:visible !important;
+  }
+  #screenResult .dots{
+    position:absolute !important; left:18px !important; right:18px !important;
+    top:50% !important; transform:translateY(-50%) !important;
+    margin:0 !important; gap:0 !important;
+    justify-content:space-between !important; display:flex !important;
+    pointer-events:none !important;
+  }
   #screenResult .header .brand-logo{
     width:clamp(190px,16vw,270px) !important;
     max-height:66px !important; max-width:none !important;
     height:auto !important; object-fit:contain !important;
   }
 
-  /* бейдж «Выбор эксперта» немного крупнее (мобилка не трогается) */
+  /* бейдж «Выбор эксперта»: размер тот же (66px), но текст заполняет круг
+     как в образце — крупнее, в две строки, без лишних отступов */
   #screenResult .expert-badge{
     width:66px !important; height:66px !important;
     top:14px !important; left:14px !important;
-    padding:8px !important; font-size:8px !important; gap:2px !important;
+    padding:4px !important; font-size:9.2px !important;
+    line-height:1.02 !important; letter-spacing:.01em !important; gap:1px !important;
   }
-  #screenResult .expert-badge .star{ font-size:14px !important; }
+  #screenResult .expert-badge .star{ font-size:16px !important; margin-bottom:1px !important; }
 
   /* значок машинки — крупнее, соразмерно другим значкам */
   .convenience-grid-v14 .convenience-item-v14:first-child .convenience-icon-v14 svg{
