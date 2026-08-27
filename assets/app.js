@@ -10,6 +10,7 @@ const SITE = {
   whatsapp: "79000000000",   // номер без + и пробелов, для wa.me. Впишите настоящий номер.
   telegram: "",               // напр. "goldglobe" (без @) — используется, если whatsapp пуст
   phone: "+7 (900) 000-00-00",
+  maxBot: "https://max.ru/id7325058694_bot",  // чат-бот в MAX (кнопка «Консультация эксперта»)
   siteUrl: "https://goldglobe.ru",
   collectLead: true
 };
@@ -380,9 +381,9 @@ if (expertConsultationBtn) {
   expertConsultationBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const { items } = matchResult();
-    const cta = ctaLink(items.map(i => i.sku));
-    log("cta", { skus: items.map(i => i.sku), meta: { type: "messenger", source: "consultation" } });
-    window.open(cta.href, "_blank", "noopener");
+    const href = SITE.maxBot || ctaLink(items.map(i => i.sku)).href;
+    log("cta", { skus: items.map(i => i.sku), meta: { type: "max", source: "consultation" } });
+    window.open(href, "_blank", "noopener");
   });
 }
 
