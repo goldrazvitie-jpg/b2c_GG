@@ -3030,3 +3030,52 @@ body.info-page-open{background:#f8f6f2}
     grid-template-rows:64px auto minmax(0,1fr) !important;
   }
 }
+
+/* ============================================================
+   v32: десктоп — экран выдачи
+   - шапка (логотип / «Назад» / «Закрыть») приведена к тому же виду,
+     что и на экранах вопросов (во всю ширину, те же отступы);
+   - строка «Отправить подборку себе» поднята, чтобы помещалась на экран;
+   - бейдж «Выбор эксперта» немного крупнее;
+   - значок машинки соразмерен другим значкам.
+   Правки только для десктопа (min-width:901px) — мобилка не затрагивается.
+   ============================================================ */
+@media (min-width:901px){
+  /* шапка выдачи = как на экранах вопросов: логотип стандартного размера,
+     а «Назад»/«Закрыть» на тех же местах. Секция выдачи имеет боковые
+     отступы 28px — вытягиваем шапку и прогресс на всю ширину, как у вопросов. */
+  #screenResult .header{
+    width:auto !important; max-width:none !important;
+    margin:0 -28px 8px !important;
+    padding:8px clamp(22px,4vw,64px) !important;
+    grid-template-columns:1fr auto 1fr !important;
+    gap:18px !important; align-items:center !important;
+  }
+  #screenResult .progress-wrap{ width:auto !important; margin-left:-28px !important; margin-right:-28px !important; }
+  #screenResult .header .brand-logo{
+    width:clamp(190px,16vw,270px) !important;
+    max-height:66px !important; max-width:none !important;
+    height:auto !important; object-fit:contain !important;
+  }
+
+  /* бейдж «Выбор эксперта» немного крупнее (мобилка не трогается) */
+  #screenResult .expert-badge{
+    width:66px !important; height:66px !important;
+    top:14px !important; left:14px !important;
+    padding:8px !important; font-size:8px !important; gap:2px !important;
+  }
+  #screenResult .expert-badge .star{ font-size:14px !important; }
+
+  /* значок машинки — крупнее, соразмерно другим значкам */
+  .convenience-grid-v14 .convenience-item-v14:first-child .convenience-icon-v14 svg{
+    transform:scale(1.12); transform-origin:left center;
+  }
+}
+
+/* строку «Отправить подборку себе» поднимаем: чуть ниже карточки товара и
+   меньше отступ заголовка. Только для нормальных по высоте десктопов (≥761px),
+   чтобы не ломать компактный режим для низких экранов. */
+@media (min-width:901px) and (min-height:761px){
+  #screenResult .result-head.updated{ margin:10px auto 16px !important; }
+  #screenResult .product-frame{ aspect-ratio:1 / 0.9 !important; }
+}

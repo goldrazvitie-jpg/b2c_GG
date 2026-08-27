@@ -4,7 +4,7 @@
 const L = {
   tag: { proposal: "Предложение", gift: "Подарок" },
   style: { minimal: "Минимализм", classic: "Классика", trends: "Тренды", unknown: "Не знаю" },
-  budget: { b1: "10–15 тыс. ₽", b2: "15–20 тыс. ₽", b3: "от 20 тыс. ₽" },
+  budget: { b1: "до 15 тыс. ₽", b2: "15–20 тыс. ₽", b3: "от 20 тыс. ₽" },
   occasion: { proposal: "Предложение", birthday: "День рождения", anniversary: "Годовщина", march8: "8 Марта", valentine: "День влюблённых", justbecause: "Просто порадовать", apology: "Извиниться" },
   priority: { like: "Ей понравится", expensive: "Выглядит дорого", meaning: "Со смыслом", fast: "Быстрый выбор" }
 };
