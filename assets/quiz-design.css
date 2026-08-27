@@ -3129,3 +3129,18 @@ body.info-page-open{background:#f8f6f2}
     padding-right:22px !important;
   }
 }
+
+/* ============================================================
+   Мобильные (≤700px): у рекомендованной карточки плашку «X% совпадение»
+   тоже выравниваем по левому краю с отступом, чтобы бейдж «Выбор эксперта»
+   не перекрывал «97%» на узких экранах (iPhone SE / 12 Pro и т.п.).
+   Размещено в конце — перебивает более раннее центрирование (v28).
+   ============================================================ */
+@media (max-width:700px){
+  #screenResult .product.featured .product-match{
+    justify-content:flex-start !important;
+    text-align:left !important;
+    padding-left:68px !important;
+    padding-right:14px !important;
+  }
+}
