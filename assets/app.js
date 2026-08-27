@@ -180,7 +180,7 @@ function renderProductCard(item, index, argument, featuredSku) {
     <article class="product ${isFeatured ? "featured" : ""}" data-sku="${item.sku}">
       <div class="product-frame">
         ${badgeHtml}
-        <div class="product-match"><strong>${match}%</strong><span>совпадение (на основе схожих профилей)</span></div>
+        <div class="product-match"><strong>${match}%</strong><span>совпадение <span class="match-note">(на основе схожих профилей)</span></span></div>
         <div class="product-img">${imgHtml}</div>
       </div>
       <div class="product-body">

@@ -3076,15 +3076,15 @@ body.info-page-open{background:#f8f6f2}
     height:auto !important; object-fit:contain !important;
   }
 
-  /* бейдж «Выбор эксперта»: размер тот же (66px), но текст заполняет круг
-     как в образце — крупнее, в две строки, без лишних отступов */
+  /* бейдж «Выбор эксперта»: на ~10% меньше, ближе к углу, с внутренним
+     отступом, чтобы текст «ЭКСПЕРТА» не доходил до края круга */
   #screenResult .expert-badge{
-    width:66px !important; height:66px !important;
-    top:14px !important; left:14px !important;
-    padding:4px !important; font-size:9.2px !important;
-    line-height:1.02 !important; letter-spacing:.01em !important; gap:1px !important;
+    width:60px !important; height:60px !important;
+    top:9px !important; left:9px !important;
+    padding:6px !important; font-size:7.2px !important;
+    line-height:1.05 !important; letter-spacing:0 !important; gap:1px !important;
   }
-  #screenResult .expert-badge .star{ font-size:16px !important; margin-bottom:1px !important; }
+  #screenResult .expert-badge .star{ font-size:13px !important; margin-bottom:1px !important; }
 
   /* значок машинки — крупнее, соразмерно другим значкам */
   .convenience-grid-v14 .convenience-item-v14:first-child .convenience-icon-v14 svg{
@@ -3117,11 +3117,15 @@ body.info-page-open{background:#f8f6f2}
    эксперта» (баг был из-за центрирования — на узких карточках текст
    попадал под бейдж). Только десктоп; на мобиле плашка и так под бейджем.
    ============================================================ */
+/* примечание «(на основе схожих профилей)» — мельче основного текста, как
+   в образце, и это же уменьшает общую ширину строки */
+#screenResult .product-match .match-note{ font-size:.82em !important; }
+
 @media (min-width:901px){
   #screenResult .product.featured .product-match{
     justify-content:flex-start !important;
     text-align:left !important;
-    padding-left:98px !important;
-    padding-right:16px !important;
+    padding-left:76px !important;
+    padding-right:22px !important;
   }
 }
