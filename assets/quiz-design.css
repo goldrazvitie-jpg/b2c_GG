@@ -3110,3 +3110,18 @@ body.info-page-open{background:#f8f6f2}
 #screenResult .repeated-product-grid .product-img img{
   mix-blend-mode:multiply !important;
 }
+
+/* ============================================================
+   Плашка «X% совпадение» на рекомендованной карточке: выравниваем по
+   левому краю с отступом, чтобы «97%» не заезжало под бейдж «Выбор
+   эксперта» (баг был из-за центрирования — на узких карточках текст
+   попадал под бейдж). Только десктоп; на мобиле плашка и так под бейджем.
+   ============================================================ */
+@media (min-width:901px){
+  #screenResult .product.featured .product-match{
+    justify-content:flex-start !important;
+    text-align:left !important;
+    padding-left:98px !important;
+    padding-right:16px !important;
+  }
+}
