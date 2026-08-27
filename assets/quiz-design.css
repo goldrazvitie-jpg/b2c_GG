@@ -3079,3 +3079,14 @@ body.info-page-open{background:#f8f6f2}
   #screenResult .result-head.updated{ margin:10px auto 16px !important; }
   #screenResult .product-frame{ aspect-ratio:1 / 0.9 !important; }
 }
+
+/* ============================================================
+   Фон фото сливается с фоном карточки (#f7f6f4): белый студийный фон
+   снимков смешивается с серым фоном рамки через mix-blend-mode:multiply,
+   поэтому «подложка» товара становится того же цвета, что и рамка.
+   ============================================================ */
+#screenResult .product-frame .product-img img,
+#screenResult .product-grid.updated .product-img img,
+#screenResult .repeated-product-grid .product-img img{
+  mix-blend-mode:multiply !important;
+}
