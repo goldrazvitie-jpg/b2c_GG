@@ -1,0 +1,8 @@
+# Netlify: статический сайт публикуется как есть, серверные функции — в netlify/functions.
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  # Бандлер собирает зависимости функций (nodemailer) из package.json.
+  node_bundler = "esbuild"

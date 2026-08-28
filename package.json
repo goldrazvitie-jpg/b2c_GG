@@ -1,0 +1,9 @@
+{
+  "name": "golden-gift-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Golden Gift — квиз подбора ювелирных подарков (статический сайт + Netlify-функция отправки подборки на e-mail)",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

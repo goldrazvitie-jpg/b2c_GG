@@ -453,17 +453,45 @@ if (selectionModal) {
     const { items } = matchResult();
     const name = nameField.value.trim();
     const email = emailField.value.trim();
+    const payloadItems = items.map(i => ({
+      sku: i.sku, name: i.name, price: i.price,
+      photo: i.photo || (PRODUCTS[i.sku] || {}).photo || "",
+      link: (PRODUCTS[i.sku] || {}).link || ""
+    }));
     log("cta", { skus: items.map(i => i.sku), meta: { type: "selection_email", source: "selection_modal" } });
+
+    const submitBtn = selectionForm.querySelector(".selection-submit");
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.dataset.label = submitBtn.textContent; submitBtn.textContent = "Отправляем…"; }
+
+    // 1) сохраняем заявку (для статистики)
     if (window.DB && DB.enabled) {
       try {
-        // Заглушка: подборка сохраняется как лид, письмо с ней пока не отправляется —
-        // рассылку писем нужно подключить отдельно (сервис e-mail-рассылок).
         await DB.insert("leads", {
           session_id: sid, name, phone: "", contact: email,
           occasion: answers.occasion, style: answers.style, budget: answers.budget, priority: answers.priority,
           skus: items.map(i => i.sku)
         });
       } catch (e) { console.warn(e); }
+    }
+
+    // 2) отправляем письмо с подборкой через Netlify-функцию (SMTP на сервере)
+    let sent = false;
+    try {
+      const res = await fetch("/.netlify/functions/send-selection", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name, items: payloadItems })
+      });
+      sent = res.ok;
+    } catch (e) { sent = false; }
+
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = submitBtn.dataset.label || "Отправить подборку"; }
+
+    const successText = selectionSuccess.querySelector("p");
+    if (successText) {
+      successText.textContent = sent
+        ? "Проверь электронную почту — рекомендации уже в пути."
+        : "Мы получили твою заявку — подборка придёт на почту в ближайшее время.";
     }
     selectionModalContent.hidden = true;
     selectionSuccess.hidden = false;
