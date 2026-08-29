@@ -1219,8 +1219,8 @@
     font-size:clamp(13px,3.7vw,16px);
   }
   .quiz-screen:not(#screenHero):not(#screenResult) .actions{
-    justify-content:flex-end;
-    padding:10px 18px 14px 86px;
+    justify-content:center;
+    padding:10px 18px 14px;
   }
   .quiz-screen:not(#screenHero):not(#screenResult) .actions .btn{
     width:min(58vw,260px);
@@ -3144,3 +3144,12 @@ body.info-page-open{background:#f8f6f2}
     padding-right:14px !important;
   }
 }
+
+/* ============================================================
+   Плашка «X% совпадение»: убрать лишний отступ между «97%» и текстом
+   (был 13px: flex-gap 7px + margin-right 6px у strong) — оставляем ~4px.
+   ============================================================ */
+#screenResult .product-match,
+#screenResult .product.featured .product-match{ gap:4px !important; }
+#screenResult .product-match strong,
+#screenResult .product.featured .product-match strong{ margin-right:0 !important; }
