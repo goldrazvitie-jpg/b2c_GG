@@ -2090,12 +2090,14 @@ html, body { width:100%; overflow-x:hidden; }
 }
 .review-stars { color:#d59a3d; font-size:23px; letter-spacing:4px; margin-bottom:22px; }
 .big-review blockquote {
-  font-family:var(--serif);
-  font-size:clamp(28px,3vw,44px);
-  line-height:1.08;
-  letter-spacing:-.025em;
+  font-family:var(--sans);
+  font-size:clamp(15px,1.15vw,17px);
+  font-weight:400;
+  line-height:1.6;
+  letter-spacing:0;
+  color:#2c2926;
   margin:0 auto 26px;
-  max-width:620px;
+  max-width:440px;
 }
 .review-author { margin-top:auto; font-weight:700; font-size:14px; letter-spacing:.04em; }
 .review-date { color:var(--muted); font-size:13px; margin-top:6px; }
@@ -2165,7 +2167,7 @@ html, body { width:100%; overflow-x:hidden; }
   .guarantee-grid,.reviews-grid { grid-template-columns:1fr; }
   .guarantee-card { min-height:0; }
   .big-review img { aspect-ratio:4/3; }
-  .big-review blockquote { font-size:31px; }
+  .big-review blockquote { font-size:16px; }
   .footer-logo { font-size:26px; }
 }
 
