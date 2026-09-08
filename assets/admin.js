@@ -12,7 +12,7 @@ const money = n => (Number(n) || 0).toLocaleString("ru-RU") + " ₽";
 const el = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
 const root = document.getElementById("root");
 
-let STATE = { products: [], matrix: [], texts: [], events: [], leads: [], tab: "products", dirty: {}, period: "all" };
+let STATE = { products: [], matrix: [], texts: [], events: [], leads: [], tab: "products", dirty: {}, period: "all", from: "", to: "" };
 
 /* ---------------- проверка конфигурации ---------------- */
 if (!window.DB || !DB.enabled) {
@@ -333,18 +333,38 @@ function renderStats() {
       <button data-p="all" class="${STATE.period==='all'?'on':''}">Всё время</button>
       <button data-p="7" class="${STATE.period==='7'?'on':''}">7 дней</button>
       <button data-p="1" class="${STATE.period==='1'?'on':''}">Сегодня</button>
+    </div>
+    <div class="range ${STATE.period==='custom'?'on':''}">
+      <label>с <input type="date" id="statFrom" value="${STATE.from}"></label>
+      <label>по <input type="date" id="statTo" value="${STATE.to}"></label>
+      <button class="btn ghost sm" id="rangeReset" type="button">Сбросить</button>
     </div></div>
     <div id="statsbody"></div>
   </div>`);
-  box.querySelectorAll(".period button").forEach(b => b.onclick = () => { STATE.period = b.dataset.p; paint(); });
+  box.querySelectorAll(".period button").forEach(b => b.onclick = () => { STATE.period = b.dataset.p; STATE.from = ""; STATE.to = ""; paint(); });
+  const applyRange = () => {
+    STATE.from = box.querySelector("#statFrom").value;
+    STATE.to = box.querySelector("#statTo").value;
+    STATE.period = (STATE.from || STATE.to) ? "custom" : "all";
+    paint();
+  };
+  box.querySelector("#statFrom").onchange = applyRange;
+  box.querySelector("#statTo").onchange = applyRange;
+  box.querySelector("#rangeReset").onclick = () => { STATE.from = ""; STATE.to = ""; STATE.period = "all"; paint(); };
   box.querySelector("#statsbody").appendChild(buildStats());
   return box;
 }
 
 function withinPeriod(ts) {
+  const time = new Date(ts).getTime();
+  if (STATE.period === "custom") {
+    if (STATE.from && time < new Date(STATE.from + "T00:00:00").getTime()) return false;
+    if (STATE.to && time > new Date(STATE.to + "T23:59:59.999").getTime()) return false;
+    return true;
+  }
   if (STATE.period === "all") return true;
   const days = STATE.period === "7" ? 7 : 1;
-  return (Date.now() - new Date(ts).getTime()) <= days * 864e5;
+  return (Date.now() - time) <= days * 864e5;
 }
 
 function buildStats() {
