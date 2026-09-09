@@ -3155,3 +3155,8 @@ body.info-page-open{background:#f8f6f2}
 #screenResult .product.featured .product-match{ gap:4px !important; }
 #screenResult .product-match strong,
 #screenResult .product.featured .product-match strong{ margin-right:0 !important; }
+
+/* Акцентная строка под подзаголовком на главной («Без регистрации и звонков»).
+   Это обычный <p> внутри .im-hero-copy — берёт адаптивные правила (мобилка:
+   по центру, десктоп: как подзаголовок), добавляем только цвет и насыщенность. */
+.im-hero-copy .im-hero-note{ color:var(--im-gold); font-weight:600; }
