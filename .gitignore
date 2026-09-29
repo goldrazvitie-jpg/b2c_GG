@@ -1,4 +1,2 @@
 node_modules/
 .netlify/
-__pycache__/
-dmdk_checker/results_*
